@@ -28,8 +28,8 @@ import { MaintenanceLog, Vehicle } from '../../core/models';
     <div class="page-container">
       <div class="page-header"><h1>Maintenance</h1></div>
 
-      <div class="filters">
-        <mat-form-field appearance="outline" style="width:240px">
+      <div class="filters" style="justify-content:space-between;">
+        <mat-form-field appearance="outline" style="width:240px;height:54px">
           <mat-label>Select Vehicle</mat-label>
           <mat-select [(value)]="selectedVehicleId" (selectionChange)="load()">
             <mat-option [value]="null">— All Vehicles —</mat-option>

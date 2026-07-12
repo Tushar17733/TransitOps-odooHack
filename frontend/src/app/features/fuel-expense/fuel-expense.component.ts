@@ -30,7 +30,7 @@ import { Vehicle, FuelLog, Expense } from '../../core/models';
         <!-- FUEL TAB -->
         <mat-tab label="Fuel Logs">
           <div style="padding:16px">
-            <div style="display:flex;gap:12px;margin-bottom:16px;align-items:flex-end;flex-wrap:wrap">
+            <div style="display:flex;gap:12px;margin-bottom:16px;justify-content:space-between;flex-wrap:wrap">
               <mat-form-field appearance="outline" style="width:240px">
                 <mat-label>Select Vehicle</mat-label>
                 <mat-select [(value)]="fuelVehicleId" (selectionChange)="loadFuel()">
@@ -75,7 +75,7 @@ import { Vehicle, FuelLog, Expense } from '../../core/models';
         <!-- EXPENSES TAB -->
         <mat-tab label="Expenses">
           <div style="padding:16px">
-            <div style="display:flex;gap:12px;margin-bottom:16px;align-items:flex-end;flex-wrap:wrap">
+            <div style="display:flex;gap:12px;margin-bottom:16px;justify-content:space-between;flex-wrap:wrap">
               <mat-form-field appearance="outline" style="width:240px">
                 <mat-label>Select Vehicle</mat-label>
                 <mat-select [(value)]="expVehicleId" (selectionChange)="loadExpenses()">

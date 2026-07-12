@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { DashboardService } from '../../core/services/dashboard.service';
 import { DashboardKPIs } from '../../core/models';
 
@@ -17,7 +18,7 @@ interface KPICard {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule, MatProgressSpinnerModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, MatProgressSpinnerModule, MatTooltipModule],
   template: `
     <div class="page-container">
 
@@ -43,7 +44,7 @@ interface KPICard {
         <!-- KPI Grid -->
         <div class="kpi-grid">
           @for (card of kpiCards; track card.label) {
-            <div class="kpi-card">
+            <div class="kpi-card" [matTooltip]="card.label">
               <div class="kpi-left">
                 <div class="kpi-value">{{card.value()}}</div>
                 <div class="kpi-label">{{card.label}}</div>
