@@ -55,9 +55,12 @@ import { AuthService } from '../../core/auth/auth.service';
             @if (form.get('password')?.hasError('required') && form.get('password')?.touched) {
               <mat-error>Password is required</mat-error>
             }
+            @if (form.get('password')?.hasError('minlength') && form.get('password')?.touched) {
+              <mat-error>Password must be at least 8 characters</mat-error>
+            }
           </mat-form-field>
 
-          <button mat-flat-button color="primary" type="submit" [disabled]="loading" class="submit-btn">
+          <button mat-flat-button color="primary" type="submit" [disabled]="loading || form.invalid" class="submit-btn">
             @if (loading) {
               <mat-spinner diameter="18" class="btn-spinner"/>
               <span>Signing in…</span>
@@ -355,7 +358,7 @@ export class LoginComponent {
 
   form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
+    password: ['', [Validators.required, Validators.minLength(8)]],
   });
 
   loading = false;
