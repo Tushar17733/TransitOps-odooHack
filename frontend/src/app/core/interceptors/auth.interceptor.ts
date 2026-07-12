@@ -15,7 +15,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(cloned).pipe(
     catchError((err: HttpErrorResponse) => {
-      if (err.status === 401) {
+      const isLoginRequest = req.url.includes('/auth/login');
+      if (err.status === 401 && !isLoginRequest) {
         auth.logout();
         snack.open('Session expired. Please log in again.', 'Close', { duration: 4000 });
       } else {

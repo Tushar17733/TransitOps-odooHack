@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
@@ -72,6 +72,7 @@ import { ApiService } from '../../core/services/api.service';
 })
 export class ReportsComponent implements OnInit {
   private api = inject(ApiService);
+  private cdr = inject(ChangeDetectorRef);
   fuelCols = ['vehicle', 'totalLiters', 'totalFuelCost', 'fillUps'];
   fuelData: any[] = [];
   fuelSource = new MatTableDataSource<any>();
@@ -79,8 +80,8 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit() {
     this.api.get<any[]>('/reports/fuel-efficiency').subscribe({
-      next: d => { this.fuelData = d; this.fuelSource.data = d; this.loadingFuel = false; },
-      error: () => this.loadingFuel = false
+      next: d => { this.fuelData = d; this.fuelSource.data = d; this.loadingFuel = false; this.cdr.detectChanges(); },
+      error: () => { this.loadingFuel = false; this.cdr.detectChanges(); }
     });
   }
 

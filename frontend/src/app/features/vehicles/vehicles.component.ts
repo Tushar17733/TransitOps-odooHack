@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatSortModule, MatSort } from '@angular/material/sort';
@@ -122,6 +122,7 @@ export class VehiclesComponent implements OnInit {
   auth = inject(AuthService);
   private dialog = inject(MatDialog);
   private snack = inject(MatSnackBar);
+  private cdr = inject(ChangeDetectorRef);
 
   cols = ['registrationNumber', 'name', 'type', 'maxLoadCapacity', 'odometer', 'region', 'status', 'actions'];
   statuses = ['available', 'on_trip', 'in_shop', 'retired'];
@@ -146,7 +147,7 @@ export class VehiclesComponent implements OnInit {
     const f: Record<string, string> = {};
     if (this.filterStatus) f['status'] = this.filterStatus;
     if (this.filterType) f['type'] = this.filterType;
-    this.svc.list(f).subscribe({ next: v => { this.dataSource.data = v; this.loading = false; }, error: () => this.loading = false });
+    this.svc.list(f).subscribe({ next: v => { this.dataSource.data = v; this.loading = false; this.cdr.detectChanges(); }, error: () => { this.loading = false; this.cdr.detectChanges(); } });
   }
 
   applyFilters() { this.load(); }

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
@@ -28,7 +28,7 @@ import { MaintenanceLog, Vehicle } from '../../core/models';
     <div class="page-container">
       <div class="page-header"><h1>Maintenance</h1></div>
 
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;align-items:flex-end">
+      <div class="filters">
         <mat-form-field appearance="outline" style="width:240px">
           <mat-label>Select Vehicle</mat-label>
           <mat-select [(value)]="selectedVehicleId" (selectionChange)="load()">
@@ -129,6 +129,7 @@ export class MaintenanceComponent implements OnInit {
   auth = inject(AuthService);
   private snack = inject(MatSnackBar);
   private fb = inject(FormBuilder);
+  private cdr = inject(ChangeDetectorRef);
 
   cols = ['vehicle', 'type', 'description', 'cost', 'status', 'openedAt', 'closedAt', 'actions'];
   types = ['preventive', 'corrective', 'emergency'];
@@ -147,16 +148,17 @@ export class MaintenanceComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.vehicleSvc.list().subscribe(v => this.vehicles = v);
+    this.vehicleSvc.list().subscribe(v => { this.vehicles = v; this.cdr.detectChanges(); });
     this.load();
   }
   ngAfterViewInit() { this.dataSource.paginator = this.paginator; }
 
   load() {
-    if (!this.selectedVehicleId) { this.loading = false; this.dataSource.data = []; return; }
+    if (!this.selectedVehicleId) { this.loading = false; this.dataSource.data = []; this.cdr.detectChanges(); return; }
     this.loading = true;
     this.svc.listByVehicle(this.selectedVehicleId).subscribe({
-      next: l => { this.dataSource.data = l; this.loading = false; }, error: () => this.loading = false
+      next: l => { this.dataSource.data = l; this.loading = false; this.cdr.detectChanges(); },
+      error: () => { this.loading = false; this.cdr.detectChanges(); }
     });
   }
 
@@ -164,7 +166,7 @@ export class MaintenanceComponent implements OnInit {
     if (!this.selectedVehicleId || this.form.invalid) return;
     const payload = { vehicleId: this.selectedVehicleId, ...this.form.value as any };
     this.svc.create(payload).subscribe({
-      next: () => { this.snack.open('Maintenance opened, vehicle moved to In Shop', '', { duration: 3000 }); this.showForm = false; this.load(); }
+      next: () => { this.snack.open('Maintenance opened, vehicle moved to In Shop', '', { duration: 3000 }); this.showForm = false; this.cdr.detectChanges(); this.load(); }
     });
   }
 

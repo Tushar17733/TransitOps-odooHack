@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatSortModule, MatSort } from '@angular/material/sort';
@@ -33,7 +33,7 @@ import { TripDialogComponent } from './trip-dialog.component';
         }
       </div>
 
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+      <div class="filters">
         <mat-form-field appearance="outline" style="width:200px">
           <mat-label>Filter by Status</mat-label>
           <mat-select [(value)]="filterStatus" (selectionChange)="load()">
@@ -114,6 +114,7 @@ export class TripsComponent implements OnInit {
   auth = inject(AuthService);
   private dialog = inject(MatDialog);
   private snack = inject(MatSnackBar);
+  private cdr = inject(ChangeDetectorRef);
 
   cols = ['id', 'route', 'vehicle', 'driver', 'cargoWeight', 'status', 'startTime', 'actions'];
   statuses = ['draft', 'dispatched', 'completed', 'cancelled'];
@@ -131,7 +132,7 @@ export class TripsComponent implements OnInit {
     this.loading = true;
     const f: Record<string, string> = {};
     if (this.filterStatus) f['status'] = this.filterStatus;
-    this.svc.list(f).subscribe({ next: t => { this.dataSource.data = t; this.loading = false; }, error: () => this.loading = false });
+    this.svc.list(f).subscribe({ next: t => { this.dataSource.data = t; this.loading = false; this.cdr.detectChanges(); }, error: () => { this.loading = false; this.cdr.detectChanges(); } });
   }
 
   openCreate() {

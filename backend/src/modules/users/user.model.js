@@ -8,10 +8,10 @@ module.exports = (sequelize) => {
     email: { type: DataTypes.STRING(150), allowNull: false, unique: true },
     password: { type: DataTypes.STRING(255), allowNull: false },
     role: {
-      type: DataTypes.ENUM(...Object.values(ROLES)),
+      type: DataTypes.STRING(30),
       allowNull: false,
       defaultValue: ROLES.DRIVER,
     },
-    status: { type: DataTypes.ENUM('active', 'inactive'), defaultValue: 'active' },
+    status: { type: DataTypes.STRING(20), defaultValue: 'active' },
   }, { tableName: 'users', timestamps: true });
 };
