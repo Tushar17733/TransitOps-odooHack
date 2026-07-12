@@ -6,7 +6,8 @@ A full-stack fleet management system built for the Odoo Hackathon. TransitOps he
 
 ## Screenshots / Demo
 
-> **[Add screenshots or GIF here before submission]**
+> **[Add screenshots or GIF here before submission]**<img width="1920" height="1080" alt="Screenshot (159)" src="https://github.com/user-attachments/assets/189d2311-da59-4b19-ad4d-727036d3f934" />
+
 >
 > Suggested captures: Login page → Fleet Dashboard (fleet_manager) → Add Vehicle dialog with validation → Create Trip with cargo check → Maintenance close form → Reports tabs → Role-specific dashboards for each of the 4 roles.
 
