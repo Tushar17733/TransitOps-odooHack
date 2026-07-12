@@ -1,17 +1,15 @@
 # TransitOps — Smart Fleet Operations Platform
 
-A full-stack fleet management system built for the Odoo Hackathon. TransitOps helps transport companies manage their vehicles, drivers, trips, maintenance schedules, fuel consumption, and operational costs — all through a role-aware interface that shows each user only what's relevant to their job. It is secured end-to-end with JWT authentication and a four-role RBAC system enforced at both the API and UI levels.
+A full-stack Smart Transport management system built for the Odoo Hackathon. TransitOps helps transport companies manage their vehicles, drivers, trips, maintenance schedules, fuel consumption, and operational costs — all through a role-aware interface that shows each user only what's relevant to their job. It is secured end-to-end with JWT authentication and a four-role RBAC system enforced at both the API and UI levels.
 
 ---
 
 ## Screenshots / Demo
 
-> **[Add screenshots or GIF here before submission]**
-><img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/440267ce-9b7b-4261-ae1b-2cf57a0c9a03" />
 
-> <img width="1920" height="1080" alt="Screenshot (159)" src="https://github.com/user-attachments/assets/189d2311-da59-4b19-ad4d-727036d3f934" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/440267ce-9b7b-4261-ae1b-2cf57a0c9a03" />
+ <img width="1920" height="1080" alt="Screenshot (159)" src="https://github.com/user-attachments/assets/189d2311-da59-4b19-ad4d-727036d3f934" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/acb0723d-ed05-403d-80aa-8f8de3d1aac5" />
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6c9fc3ed-cc2f-4dd8-a427-06fcf3f9b36a" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0f9c42d5-bcaf-4f67-a575-6f4d1d221fca" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1df91741-f878-4916-89d1-5f5e40eeaf73" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5ac8920b-02a7-4346-8f36-c2343087aad8" />
@@ -27,7 +25,7 @@ A full-stack fleet management system built for the Odoo Hackathon. TransitOps he
 
 
 >
-> Suggested captures: Login page → Fleet Dashboard (fleet_manager) → Add Vehicle dialog with validation → Create Trip with cargo check → Maintenance close form → Reports tabs → Role-specific dashboards for each of the 4 roles.
+>
 
 ---
 
@@ -352,43 +350,4 @@ All routes prefixed with `/api`. All routes except `/auth/login` and `/auth/regi
 
 ---
 
-## Design System
 
-| Token | Value |
-|---|---|
-| Primary | `#6366F1` (Indigo) |
-| Accent | `#8B5CF6` (Violet) |
-| Success | `#10B981` (Emerald) |
-| Warning | `#F59E0B` (Amber) |
-| Danger | `#EF4444` (Red) |
-| Cyan | `#06B6D4` |
-| Sidebar BG | `linear-gradient(175deg, #0D1117, #19213A)` |
-| Page BG | `#F1F5F9` |
-| Font (body) | Inter |
-| Font (headings) | Plus Jakarta Sans |
-
----
-
-## Known Limitations / Future Work
-
-The following were intentionally out of scope for the hackathon:
-
-- **PDF / Excel export** — reports currently export as CSV only; formatted PDF with branding is not implemented
-- **Email notifications** — no email alerts for expiring licenses, overdue maintenance, or trip events
-- **Document management** — no file uploads (insurance documents, RC copies, etc.)
-- **Real-time updates** — no WebSocket / SSE; page must be manually refreshed to see changes made by other users
-- **Dark mode** — light-only UI; dark theme toggle not implemented
-- **Mobile app** — web-responsive only, no native Android/iOS build
-- **Pagination on reports** — report tables load all rows at once; large fleets may see slow queries
-- **Multi-tenant / multi-company** — single-company setup; no organisation isolation
-- **Password reset flow** — no forgot-password / reset-by-email feature
-- **Audit log** — no change history tracking per record
-
----
-
-## Credits
-
-Built for the **Odoo Hackathon** by Harsh Gondaliya.
-
-> Frontend: Angular 22 + Angular Material M3
-> Backend: Node.js + Express + Sequelize + MySQL
