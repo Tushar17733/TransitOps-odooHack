@@ -27,7 +27,8 @@ import { Vehicle, FuelLog, Expense } from '../../core/models';
       <div class="page-header"><h1>Fuel & Expenses</h1></div>
 
       <mat-tab-group>
-        <!-- FUEL TAB -->
+        <!-- FUEL TAB: fleet_manager, driver -->
+        @if (auth.hasRole('fleet_manager', 'driver')) {
         <mat-tab label="Fuel Logs">
           <div style="padding:16px">
             <div style="display:flex;gap:12px;margin-bottom:16px;justify-content:space-between;flex-wrap:wrap">
@@ -71,8 +72,10 @@ import { Vehicle, FuelLog, Expense } from '../../core/models';
             </div>
           </div>
         </mat-tab>
+        } <!-- end fuel tab -->
 
-        <!-- EXPENSES TAB -->
+        <!-- EXPENSES TAB: fleet_manager, financial_analyst -->
+        @if (auth.hasRole('fleet_manager', 'financial_analyst')) {
         <mat-tab label="Expenses">
           <div style="padding:16px">
             <div style="display:flex;gap:12px;margin-bottom:16px;justify-content:space-between;flex-wrap:wrap">
@@ -120,6 +123,7 @@ import { Vehicle, FuelLog, Expense } from '../../core/models';
             </div>
           </div>
         </mat-tab>
+        } <!-- end expenses tab -->
       </mat-tab-group>
     </div>
   `

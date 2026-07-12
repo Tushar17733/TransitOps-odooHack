@@ -10,7 +10,7 @@ router.use(authenticate);
 
 router.get('/', ctrl.listByVehicle);
 router.get('/:id', ctrl.getOne);
-router.post('/', permit(ROLES.FLEET_MANAGER), createRules, validate, ctrl.create);
-router.patch('/:id/close', permit(ROLES.FLEET_MANAGER), closeRules, validate, ctrl.close);
+router.post('/', permit(ROLES.FLEET_MANAGER, ROLES.SAFETY_OFFICER), createRules, validate, ctrl.create);
+router.patch('/:id/close', permit(ROLES.FLEET_MANAGER, ROLES.SAFETY_OFFICER), closeRules, validate, ctrl.close);
 
 module.exports = router;

@@ -36,7 +36,7 @@ import { MaintenanceLog, Vehicle } from '../../core/models';
             @for (v of vehicles; track v.id){ <mat-option [value]="v.id">{{v.registrationNumber}} — {{v.name}}</mat-option> }
           </mat-select>
         </mat-form-field>
-        @if (auth.hasRole('fleet_manager') && selectedVehicleId) {
+        @if (auth.hasRole('fleet_manager', 'safety_officer') && selectedVehicleId) {
           <button mat-flat-button color="primary" (click)="showForm=!showForm">
             <mat-icon>add</mat-icon> Log Maintenance
           </button>
@@ -104,7 +104,7 @@ import { MaintenanceLog, Vehicle } from '../../core/models';
             <ng-container matColumnDef="actions">
               <th mat-header-cell *matHeaderCellDef>Actions</th>
               <td mat-cell *matCellDef="let m">
-                @if (auth.hasRole('fleet_manager') && m.status === 'active') {
+                @if (auth.hasRole('fleet_manager', 'safety_officer') && m.status === 'active') {
                   <button mat-stroked-button color="primary" (click)="close(m)" matTooltip="Close maintenance">
                     <mat-icon>check</mat-icon> Close
                   </button>

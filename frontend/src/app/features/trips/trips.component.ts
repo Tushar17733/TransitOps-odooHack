@@ -25,7 +25,12 @@ import { TripDialogComponent } from './trip-dialog.component';
   template: `
     <div class="page-container">
       <div class="page-header">
-        <h1>Trips</h1>
+        <div>
+          <h1>Trips</h1>
+          @if (auth.hasRole('driver')) {
+            <p style="margin:0;font-size:13px;color:#64748B">Showing your assigned trips</p>
+          }
+        </div>
         @if (auth.hasRole('fleet_manager')) {
           <button mat-flat-button color="primary" (click)="openCreate()">
             <mat-icon>add</mat-icon> Create Trip
@@ -33,15 +38,17 @@ import { TripDialogComponent } from './trip-dialog.component';
         }
       </div>
 
-      <div class="filters">
-        <mat-form-field appearance="outline" style="width:200px">
-          <mat-label>Filter by Status</mat-label>
-          <mat-select [(value)]="filterStatus" (selectionChange)="load()">
-            <mat-option value="">All</mat-option>
-            @for (s of statuses; track s){ <mat-option [value]="s">{{s | titlecase}}</mat-option> }
-          </mat-select>
-        </mat-form-field>
-      </div>
+      @if (auth.hasRole('fleet_manager')) {
+        <div class="filters">
+          <mat-form-field appearance="outline" style="width:200px">
+            <mat-label>Filter by Status</mat-label>
+            <mat-select [(value)]="filterStatus" (selectionChange)="load()">
+              <mat-option value="">All</mat-option>
+              @for (s of statuses; track s){ <mat-option [value]="s">{{s | titlecase}}</mat-option> }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      }
 
       <div class="table-container">
         @if (loading) {
@@ -130,9 +137,13 @@ export class TripsComponent implements OnInit {
 
   load() {
     this.loading = true;
-    const f: Record<string, string> = {};
-    if (this.filterStatus) f['status'] = this.filterStatus;
-    this.svc.list(f).subscribe({ next: t => { this.dataSource.data = t; this.loading = false; this.cdr.detectChanges(); }, error: () => { this.loading = false; this.cdr.detectChanges(); } });
+    if (this.auth.hasRole('driver')) {
+      this.svc.listMine().subscribe({ next: t => { this.dataSource.data = t; this.loading = false; this.cdr.detectChanges(); }, error: () => { this.loading = false; this.cdr.detectChanges(); } });
+    } else {
+      const f: Record<string, string> = {};
+      if (this.filterStatus) f['status'] = this.filterStatus;
+      this.svc.list(f).subscribe({ next: t => { this.dataSource.data = t; this.loading = false; this.cdr.detectChanges(); }, error: () => { this.loading = false; this.cdr.detectChanges(); } });
+    }
   }
 
   openCreate() {

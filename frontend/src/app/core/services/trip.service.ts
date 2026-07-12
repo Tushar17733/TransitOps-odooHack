@@ -9,6 +9,9 @@ export class TripService {
   list(filters: Record<string, string | number> = {}) {
     return this.api.get<Trip[]>('/trips', filters);
   }
+  listMine() {
+    return this.api.get<Trip[]>('/trips/mine');
+  }
   getById(id: number) {
     return this.api.get<Trip>(`/trips/${id}`);
   }
