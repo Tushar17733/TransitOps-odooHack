@@ -68,14 +68,22 @@ import { AuthService } from '../../core/auth/auth.service';
           </button>
         </form>
 
-        <!-- Footer -->
-        <div class="card-footer">
-          <div class="footer-badges">
-            <span class="badge"><mat-icon>directions_bus</mat-icon>Fleet</span>
-            <span class="badge"><mat-icon>route</mat-icon>Trips</span>
-            <span class="badge"><mat-icon>bar_chart</mat-icon>Reports</span>
+        <!-- Demo Accounts -->
+        <div class="demo-section">
+          <div class="demo-label">Demo Accounts</div>
+          <div class="demo-grid">
+            @for (d of demoAccounts; track d.email) {
+              <button type="button" class="demo-card" (click)="fillDemo(d.email, d.password)">
+                <span class="demo-icon" [style.background]="d.color">
+                  <mat-icon>{{d.icon}}</mat-icon>
+                </span>
+                <span class="demo-info">
+                  <span class="demo-role">{{d.role}}</span>
+                  <span class="demo-pass">{{d.password}}</span>
+                </span>
+              </button>
+            }
           </div>
-          <p class="footer-text">Smart Transport Operations Platform</p>
         </div>
       </div>
     </div>
@@ -238,6 +246,88 @@ import { AuthService } from '../../core/auth/auth.service';
       color: #94A3B8;
     }
 
+    // ── Demo Accounts ─────────────────────────────────────────────────────────
+    .demo-section {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid #F1F5F9;
+    }
+
+    .demo-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #94A3B8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+    }
+
+    .demo-card {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: left;
+      width: 100%;
+
+      &:hover {
+        background: #F1F5F9;
+        border-color: #CBD5E1;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      }
+    }
+
+    .demo-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+
+      mat-icon {
+        font-size: 15px;
+        width: 15px;
+        height: 15px;
+        color: #fff;
+      }
+    }
+
+    .demo-info {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .demo-role {
+      font-size: 11px;
+      font-weight: 600;
+      color: #334155;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .demo-pass {
+      font-size: 10px;
+      color: #94A3B8;
+      font-family: 'Courier New', monospace;
+    }
+
     // ── Animations ────────────────────────────────────────────────────────────
     @keyframes orbFloat1 {
       0%   { transform: translate(0, 0) scale(1); }
@@ -270,6 +360,18 @@ export class LoginComponent {
 
   loading = false;
   showPass = false;
+
+  demoAccounts = [
+    { role: 'Fleet Manager',    email: 'fleet@transitops.com',   password: 'fleet123',   icon: 'directions_bus', color: 'linear-gradient(135deg,#6366F1,#8B5CF6)' },
+    { role: 'Safety Officer',   email: 'safety@transitops.com',  password: 'safety123',  icon: 'verified_user',  color: 'linear-gradient(135deg,#10B981,#059669)' },
+    { role: 'Finance Analyst',  email: 'finance@transitops.com', password: 'finance123', icon: 'bar_chart',      color: 'linear-gradient(135deg,#F59E0B,#D97706)' },
+    { role: 'Driver',           email: 'driver@transitops.com',  password: 'driver123',  icon: 'person',         color: 'linear-gradient(135deg,#06B6D4,#0891B2)' },
+  ];
+
+  fillDemo(email: string, password: string) {
+    this.form.setValue({ email, password });
+    this.cdr.detectChanges();
+  }
 
   submit() {
     if (this.form.invalid) { this.form.markAllAsTouched(); return; }

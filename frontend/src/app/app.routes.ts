@@ -14,11 +14,31 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       { path: 'dashboard', loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent) },
-      { path: 'vehicles', loadComponent: () => import('./features/vehicles/vehicles.component').then(m => m.VehiclesComponent) },
-      { path: 'drivers', loadComponent: () => import('./features/drivers/drivers.component').then(m => m.DriversComponent) },
-      { path: 'trips', loadComponent: () => import('./features/trips/trips.component').then(m => m.TripsComponent) },
-      { path: 'maintenance', loadComponent: () => import('./features/maintenance/maintenance.component').then(m => m.MaintenanceComponent) },
-      { path: 'fuel-expense', loadComponent: () => import('./features/fuel-expense/fuel-expense.component').then(m => m.FuelExpenseComponent) },
+      {
+        path: 'vehicles',
+        canActivate: [roleGuard('fleet_manager', 'safety_officer')],
+        loadComponent: () => import('./features/vehicles/vehicles.component').then(m => m.VehiclesComponent),
+      },
+      {
+        path: 'drivers',
+        canActivate: [roleGuard('fleet_manager', 'safety_officer')],
+        loadComponent: () => import('./features/drivers/drivers.component').then(m => m.DriversComponent),
+      },
+      {
+        path: 'trips',
+        canActivate: [roleGuard('fleet_manager', 'driver')],
+        loadComponent: () => import('./features/trips/trips.component').then(m => m.TripsComponent),
+      },
+      {
+        path: 'maintenance',
+        canActivate: [roleGuard('fleet_manager', 'safety_officer')],
+        loadComponent: () => import('./features/maintenance/maintenance.component').then(m => m.MaintenanceComponent),
+      },
+      {
+        path: 'fuel-expense',
+        canActivate: [roleGuard('fleet_manager', 'driver', 'financial_analyst')],
+        loadComponent: () => import('./features/fuel-expense/fuel-expense.component').then(m => m.FuelExpenseComponent),
+      },
       {
         path: 'reports',
         canActivate: [roleGuard('fleet_manager', 'financial_analyst')],

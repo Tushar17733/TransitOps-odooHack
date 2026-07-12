@@ -8,6 +8,7 @@ const { ROLES } = require('../../config/constants');
 
 router.use(authenticate);
 
+router.get('/mine', permit(ROLES.DRIVER), ctrl.listMine);
 router.get('/', filterRules, validate, ctrl.list);
 router.get('/:id', ctrl.getOne);
 router.post('/', permit(ROLES.FLEET_MANAGER), createRules, validate, ctrl.create);

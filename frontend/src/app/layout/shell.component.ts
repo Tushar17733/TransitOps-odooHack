@@ -362,12 +362,12 @@ export class ShellComponent {
 
   nav: NavItem[] = [
     { label: 'Dashboard',      icon: 'dashboard',        route: '/dashboard' },
-    { label: 'Vehicles',       icon: 'directions_bus',   route: '/vehicles' },
-    { label: 'Drivers',        icon: 'person',           route: '/drivers' },
-    { label: 'Trips',          icon: 'route',            route: '/trips' },
-    { label: 'Maintenance',    icon: 'build',            route: '/maintenance' },
-    { label: 'Fuel & Expenses',icon: 'local_gas_station',route: '/fuel-expense' },
-    { label: 'Reports',        icon: 'bar_chart',        route: '/reports', roles: ['fleet_manager', 'financial_analyst'] },
+    { label: 'Vehicles',       icon: 'directions_bus',   route: '/vehicles',     roles: ['fleet_manager', 'safety_officer'] },
+    { label: 'Drivers',        icon: 'person',           route: '/drivers',      roles: ['fleet_manager', 'safety_officer'] },
+    { label: 'Trips',          icon: 'route',            route: '/trips',        roles: ['fleet_manager', 'driver'] },
+    { label: 'Maintenance',    icon: 'build',            route: '/maintenance',  roles: ['fleet_manager', 'safety_officer'] },
+    { label: 'Fuel & Expenses',icon: 'local_gas_station',route: '/fuel-expense', roles: ['fleet_manager', 'driver', 'financial_analyst'] },
+    { label: 'Reports',        icon: 'bar_chart',        route: '/reports',      roles: ['fleet_manager', 'financial_analyst'] },
   ];
 
   get visibleNav() {
