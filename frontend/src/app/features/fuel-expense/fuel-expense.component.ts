@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -130,6 +130,7 @@ export class FuelExpenseComponent implements OnInit {
   auth = inject(AuthService);
   private snack = inject(MatSnackBar);
   private fb = inject(FormBuilder);
+  private cdr = inject(ChangeDetectorRef);
 
   vehicles: Vehicle[] = [];
   fuelVehicleId: number | null = null;
@@ -159,29 +160,29 @@ export class FuelExpenseComponent implements OnInit {
     description: [''],
   });
 
-  ngOnInit() { this.vehicleSvc.list().subscribe(v => this.vehicles = v); }
+  ngOnInit() { this.vehicleSvc.list().subscribe(v => { this.vehicles = v; this.cdr.detectChanges(); }); }
 
   loadFuel() {
     if (!this.fuelVehicleId) return;
-    this.svc.getFuelByVehicle(this.fuelVehicleId).subscribe(l => this.fuelSource.data = l);
+    this.svc.getFuelByVehicle(this.fuelVehicleId).subscribe(l => { this.fuelSource.data = l; this.cdr.detectChanges(); });
   }
 
   loadExpenses() {
     if (!this.expVehicleId) return;
-    this.svc.getExpensesByVehicle(this.expVehicleId).subscribe(e => this.expSource.data = e);
+    this.svc.getExpensesByVehicle(this.expVehicleId).subscribe(e => { this.expSource.data = e; this.cdr.detectChanges(); });
   }
 
   submitFuel() {
     if (!this.fuelVehicleId || this.fuelForm.invalid) return;
     this.svc.logFuel({ vehicleId: this.fuelVehicleId, ...this.fuelForm.value as any }).subscribe({
-      next: () => { this.snack.open('Fuel logged!', '', { duration: 3000 }); this.showFuelForm = false; this.loadFuel(); }
+      next: () => { this.snack.open('Fuel logged!', '', { duration: 3000 }); this.showFuelForm = false; this.cdr.detectChanges(); this.loadFuel(); }
     });
   }
 
   submitExp() {
     if (!this.expVehicleId || this.expForm.invalid) return;
     this.svc.logExpense({ vehicleId: this.expVehicleId, ...this.expForm.value as any }).subscribe({
-      next: () => { this.snack.open('Expense logged!', '', { duration: 3000 }); this.showExpForm = false; this.loadExpenses(); }
+      next: () => { this.snack.open('Expense logged!', '', { duration: 3000 }); this.showExpForm = false; this.cdr.detectChanges(); this.loadExpenses(); }
     });
   }
 }

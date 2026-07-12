@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -82,6 +82,7 @@ export class TripDialogComponent implements OnInit {
   data = inject(MAT_DIALOG_DATA);
   private vehicleSvc = inject(VehicleService);
   private driverSvc = inject(DriverService);
+  private cdr = inject(ChangeDetectorRef);
 
   vehicles: Vehicle[] = [];
   drivers: Driver[] = [];
@@ -106,6 +107,7 @@ export class TripDialogComponent implements OnInit {
       this.vehicles = v ?? [];
       this.drivers = d ?? [];
       this.loadingData = false;
+      this.cdr.detectChanges();
     });
   }
 

@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
     contactNumber: { type: DataTypes.STRING(20) },
     safetyScore: { type: DataTypes.DECIMAL(5, 2), defaultValue: 100.00 },
     status: {
-      type: DataTypes.ENUM(...Object.values(DRIVER_STATUS)),
+      type: DataTypes.STRING(30),
       allowNull: false,
       defaultValue: DRIVER_STATUS.AVAILABLE,
     },

@@ -5,11 +5,11 @@ module.exports = (sequelize) => {
   return sequelize.define('MaintenanceLog', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     vehicleId: { type: DataTypes.INTEGER, allowNull: false },
-    type: { type: DataTypes.ENUM(...MAINTENANCE_TYPES), allowNull: false },
+    type: { type: DataTypes.STRING(50), allowNull: false },
     description: { type: DataTypes.TEXT },
     cost: { type: DataTypes.DECIMAL(12, 2), defaultValue: 0 },
     status: {
-      type: DataTypes.ENUM(...Object.values(MAINTENANCE_STATUS)),
+      type: DataTypes.STRING(30),
       allowNull: false,
       defaultValue: MAINTENANCE_STATUS.ACTIVE,
     },

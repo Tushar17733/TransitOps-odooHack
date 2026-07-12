@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
     plannedDistance: { type: DataTypes.DECIMAL(10, 2), defaultValue: 0 },
     actualDistance: { type: DataTypes.DECIMAL(10, 2) },
     status: {
-      type: DataTypes.ENUM(...Object.values(TRIP_STATUS)),
+      type: DataTypes.STRING(30),
       allowNull: false,
       defaultValue: TRIP_STATUS.DRAFT,
     },
