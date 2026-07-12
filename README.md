@@ -6,11 +6,21 @@ A full-stack fleet management system built for the Odoo Hackathon. TransitOps he
 
 ## Screenshots / Demo
 
-> **[Add screenshots or GIF here before submission]**<img width="1920" height="1080" alt="Screenshot (159)" src="https://github.com/user-attachments/assets/189d2311-da59-4b19-ad4d-727036d3f934" />
+> **[Add screenshots or GIF here before submission]**
+><img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/440267ce-9b7b-4261-ae1b-2cf57a0c9a03" />
+
+> <img width="1920" height="1080" alt="Screenshot (159)" src="https://github.com/user-attachments/assets/189d2311-da59-4b19-ad4d-727036d3f934" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/acb0723d-ed05-403d-80aa-8f8de3d1aac5" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6c9fc3ed-cc2f-4dd8-a427-06fcf3f9b36a" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0f9c42d5-bcaf-4f67-a575-6f4d1d221fca" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1df91741-f878-4916-89d1-5f5e40eeaf73" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5ac8920b-02a7-4346-8f36-c2343087aad8" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/cfc4126e-105b-4417-8303-e9184a0f1773" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/86c21f38-7ea5-486b-b211-2461a0c23b4e" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a66bfc2b-9038-485f-801b-cf666a0f3732" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3ce3e94b-90ea-4380-9275-332f1fc281a4" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b98d1418-cac7-4ea2-aa06-80bb533915c9" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/538d260a-cd95-41c3-be3e-07b14b9a09db" />
 
 
 
